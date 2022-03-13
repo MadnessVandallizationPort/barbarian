@@ -75,9 +75,7 @@ class Option
 
 class CustomControls extends Option
 {
-  var desc:FlxText;
-  
-  public function new(Desc:String)
+  public function new(desc:String)
   {
     super();
     description = desc;
@@ -94,9 +92,7 @@ class CustomControls extends Option
 }
 class About extends Option
 {
-  var desc:FlxText;
-  
-  public function new(desk:String)
+  public function new(desc:String)
   {
     super();
     description = desc;
