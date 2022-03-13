@@ -2817,9 +2817,8 @@ class PlayState extends MusicBeatState
 			}
 
 		if (isStoryMode)
+      mcontrols.visible = false;
 			campaignMisses = misses;
-
-    mcontrols.visible = false;
     
 		else
 		{
