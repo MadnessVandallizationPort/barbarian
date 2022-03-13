@@ -16,6 +16,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+import flixel.FlxCamera;
 
 class OptionsMenu extends MusicBeatState
 {
@@ -62,6 +63,11 @@ class OptionsMenu extends MusicBeatState
 			new ShowInput("Display every single input in the score screen."),
 			new Optimization("No backgrounds, no characters, centered notes, no player 2."),
 			new BotPlay("Showcase your charts and mods with autoplay."),
+		]),
+		
+		new OptionCategory("Mobile Settings", [
+		  new CustomControls("edit a control"),
+		  new About("about android port")
 		])
 		
 	];
@@ -113,6 +119,10 @@ class OptionsMenu extends MusicBeatState
 
 		FlxTween.tween(versionShit,{y: FlxG.height - 18},2,{ease: FlxEase.elasticInOut});
 		FlxTween.tween(blackBorder,{y: FlxG.height - 18},2, {ease: FlxEase.elasticInOut});
+		
+		#if mobileC
+		addVirtualPad(UP_DOWN, A_B);
+		#end
 
 		super.create();
 	}

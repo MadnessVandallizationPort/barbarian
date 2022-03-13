@@ -63,6 +63,9 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+#if mobileC
+import ui.Mobilecontrols;
+#end
 
 #if windows
 import Discord.DiscordClient;
@@ -229,6 +232,10 @@ class PlayState extends MusicBeatState
 	public static var highestCombo:Int = 0;
 
 	private var executeModchart = false;
+	
+	#if mobileC
+	var mcontrols:Mobilecontrols; 
+	#end
 
 	// API stuff
 	
@@ -1108,6 +1115,31 @@ class PlayState extends MusicBeatState
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		
+		#if mobileC
+			mcontrols = new Mobilecontrols();
+			switch (mcontrols.mode)
+			{
+				case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
+					controls.setVirtualPad(mcontrols._virtualPad, FULL, NONE);
+				case HITBOX:
+					controls.setHitBox(mcontrols._hitbox);
+				default:
+			}
+			trackedinputs = controls.trackedinputs;
+			controls.trackedinputs = [];
+
+			var camcontrol = new FlxCamera();
+			FlxG.cameras.add(camcontrol);
+			camcontrol.bgColor.alpha = 0;
+			mcontrols.cameras = [camcontrol];
+
+			//mcontrols.visible = false;
+			mcontrols.alpha = 0;
+
+			add(mcontrols);
+		#end
+		
 		if (FlxG.save.data.songPosition)
 		{
 			songPosBG.cameras = [camHUD];
@@ -1282,6 +1314,8 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
+	  mcontrols.visible = false;
+	  
 		inCutscene = false;
 
 		generateStaticArrows(0);
@@ -2118,7 +2152,7 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.x = (originalX - (lengthInPx / 2)) + 335;
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if (FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -2771,6 +2805,7 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+	  
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN,handleInput);
 		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP,releaseInput);
 		if (useVideo)
@@ -2784,8 +2819,8 @@ class PlayState extends MusicBeatState
 		if (isStoryMode)
 			campaignMisses = misses;
 
-		if (!loadRep)
-			rep.SaveReplay(saveNotes, saveJudge, replayAna);
+    mcontrols.visible = false;
+    
 		else
 		{
 			PlayStateChangeables.botPlay = false;
@@ -2870,7 +2905,6 @@ class PlayState extends MusicBeatState
 
 					if (SONG.validScore)
 					{
-						NGio.unlockMedal(60961);
 						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 					}
 
