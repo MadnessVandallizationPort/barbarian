@@ -7,6 +7,7 @@ import Controls.KeyboardScheme;
 import flixel.FlxG;
 import openfl.display.FPS;
 import openfl.Lib;
+import flixel.FlxText;
 
 class OptionCategory
 {
@@ -74,6 +75,8 @@ class Option
 
 class CustomControls extends Option
 {
+  var desc:FlxText;
+  
   public function new(Desc:String)
   {
     super();
@@ -91,6 +94,8 @@ class CustomControls extends Option
 }
 class About extends Option
 {
+  var desc:FlxText;
+  
   public function new(desk:String)
   {
     super();
