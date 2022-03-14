@@ -1,7 +1,6 @@
 //This was made by GWebDev lol btw this uses actuate
 package;
 
-import motion.Actuate;
 import openfl.display.Sprite;
 import openfl.events.AsyncErrorEvent;
 import openfl.events.MouseEvent;
