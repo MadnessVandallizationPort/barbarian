@@ -32,16 +32,6 @@ class WebmHandler
 	public var ended:Bool = false;
 	public var paused:Bool = false;
 	
-	public function togglePause():Void
-	{
-		if (paused)
-		{
-			resume();
-		} else {
-			pause();
-		}
-	}
-	
 	public function onStop():Void
 	{
 		stopped = true;
