@@ -10,7 +10,6 @@ class WebmHandler
 {
 	#if sys
 	public var vidPath:String = "";
-	public var io:WebmIo;
 	public var initialized:Bool = false;
 	
 	public function new()
