@@ -7,9 +7,6 @@ import openfl.ui.Keyboard;
 import openfl.events.KeyboardEvent;
 import Replay.Ana;
 import Replay.Analysis;
-#if cpp
-import webm.WebmPlayer;
-#end
 import flixel.input.keyboard.FlxKey;
 import haxe.Exception;
 import openfl.geom.Matrix;
@@ -3529,12 +3526,10 @@ class PlayState extends MusicBeatState
 					FlxG.stage.window.onFocusIn.add(focusIn);
 
 					var ourSource:String = "assets/videos/daWeirdVid/dontDelete.webm";
-					WebmPlayer.SKIP_STEP_LIMIT = 90;
 					var str1:String = "WEBM SHIT"; 
 					webmHandler = new WebmHandler();
 					webmHandler.source(ourSource);
 					webmHandler.makePlayer();
-					webmHandler.webm.name = str1;
 			
 					GlobalVideo.setWebm(webmHandler);
 
@@ -3552,8 +3547,6 @@ class PlayState extends MusicBeatState
 					} else {
 						GlobalVideo.get().play();
 					}
-					
-					var data = webmHandler.webm.bitmapData;
 			
 					videoSprite = new FlxSprite(-470,-30).loadGraphic(data);
 			
