@@ -3529,7 +3529,6 @@ class PlayState extends MusicBeatState
 					var str1:String = "WEBM SHIT"; 
 					webmHandler = new WebmHandler();
 					webmHandler.source(ourSource);
-					webmHandler.makePlayer();
 			
 					GlobalVideo.setWebm(webmHandler);
 
@@ -3548,8 +3547,6 @@ class PlayState extends MusicBeatState
 						GlobalVideo.get().play();
 					}
 			
-					videoSprite = new FlxSprite(-470,-30).loadGraphic(data);
-			
 					videoSprite.setGraphicSize(Std.int(videoSprite.width * 1.2));
 			
 					remove(gf);
@@ -3559,13 +3556,7 @@ class PlayState extends MusicBeatState
 					add(gf);
 					add(boyfriend);
 					add(dad);
-			
-					trace('poggers');
-			
-					if (!songStarted)
-						webmHandler.pause();
-					else
-						webmHandler.resume();
+					
 					#end
 				}
 
