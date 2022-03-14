@@ -9,7 +9,6 @@ import webm.*;
 class WebmHandler
 {
 	#if sys
-	public var webm:WebmPlayer;
 	public var vidPath:String = "";
 	public var io:WebmIo;
 	public var initialized:Bool = false;
