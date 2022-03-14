@@ -11,6 +11,7 @@ class WebmHandler
 	#if sys
 	public var vidPath:String = "";
 	public var initialized:Bool = false;
+	#end
 	
 	
 	public function new()
